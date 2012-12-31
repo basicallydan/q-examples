@@ -1,6 +1,6 @@
 # Q-Promises
 
-The purpose of this small respository is to maintain a selection of example uses of [https://github.com/kriskowal/q](Q) for reference and learning.
+The purpose of this small respository is to maintain a selection of example uses of [Q](https://github.com/kriskowal/q) for reference and learning.
 
 Kriskowal's tutorial is fine, but a few examples from a third party never hurt anyone :)
 
