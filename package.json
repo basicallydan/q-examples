@@ -1,0 +1,9 @@
+{
+	"name" : "Q-Examples",
+	"version" : "0.0.1",
+	"author" : "Dan Hough <daniel.hough@gmail.com>",
+	"dependencies" : {
+		"request" : "2.12.x",
+		"q" : "0.8.x"
+	}
+}
