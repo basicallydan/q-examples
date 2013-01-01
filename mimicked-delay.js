@@ -14,6 +14,7 @@ var second = function () {
 	return d.promise;
 };
 
+// This fuction throws an error which later on we show will be handled
 var third = function () {
 	var d = Q.defer();
 	console.log('Third one');
@@ -21,6 +22,7 @@ var third = function () {
 	throw new Error('Awww sheeeeiiiit');
 };
 
+// This function will not be reached because the previous one is going to fall over.
 var fourth = function () {
 	var d = Q.defer();
 	console.log('Fourth one');
@@ -28,11 +30,11 @@ var fourth = function () {
 	return d.promise;
 };
 
-first().
-then(second).
-then(third, function (error) {
-	console.log('Something went wrong in 1-2: ' + error.message);
-})
+first()
+.then(second)
+.then(third)
 .then(fourth, function (error) {
 	console.log('Something went wrong in 1-3: ' + error.message);
-});
+})
+// We are not returning the promise chain, so we need to call done() to ensure unhandled errors are rethrown
+.done();
