@@ -25,7 +25,7 @@ var oneB = function () {
 // This fuction throws an error which later on we show will be handled
 var two = function (oneATime, oneBTime) {
 	var d = Q.defer();
-	console('OneA: ' + oneATime + ', OneB: ' + oneBTime);
+	console.log('OneA: ' + oneATime + ', OneB: ' + oneBTime);
 	console.log('2 Starting and Finishing, so 3A and 3B should start');
 	d.resolve();
 	return d.promise;
