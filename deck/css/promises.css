@@ -1,0 +1,63 @@
+/* fade out inactive slides */
+.step:not(.active) {
+    opacity: 0.1;
+}
+
+h2 {
+    font-size:60px;
+    line-height:80px;
+    margin-bottom:40px;
+}
+
+pre.prettyprint {
+	border:none!important;
+}
+
+blockquote {
+	line-height:60px;
+    font-style:italic;
+    font-size:38px;
+    text-align:center;
+    margin:50px 20px;
+}
+
+ul, ol {
+	margin:20px 0;
+	display:block;
+}
+
+li {
+	margin-left:50px;
+	margin-top:10px;
+}
+
+.title {
+    padding: 0;
+}
+
+.title .try {
+    font-size: 64px;
+    position: absolute;
+    top: -0.5em;
+    left: 1.5em;
+    
+    -webkit-transform: translateZ(20px);
+    -moz-transform:    translateZ(20px);
+    -ms-transform:     translateZ(20px);
+    -o-transform:      translateZ(20px);
+    transform:         translateZ(20px);
+}
+
+.title h1 {
+    font-size: 190px;
+    
+    -webkit-transform: translateZ(50px);
+    -moz-transform:    translateZ(50px);
+    -ms-transform:     translateZ(50px);
+    -o-transform:      translateZ(50px);
+    transform:         translateZ(50px);
+}
+
+.title .footnote {
+    font-size: 32px;
+}

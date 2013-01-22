@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=1024" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <title>Promises</title>
+    
+    <meta name="description" content="Promises" />
+    <meta name="author" content="Daniel Hough" />
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
+
+    <!--
+        
+        Impress.js doesn't depend on any external stylesheet. Script adds all styles it needs for
+        presentation to work.
+        
+        This style below contains styles only for demo presentation. Browse it to see how impress.js
+        classes are used to style presentation steps, or how to apply fallback styles, but I don't want
+        you to use them directly in your presentation.
+        
+        Be creative, build your own. We don't really want all impress.js presentations to look the same,
+        do we?
+        
+        When creating your own presentation get rid of this file. Start from scratch, it's fun!
+        
+    -->
+    <link href="css/impress-demo.css" rel="stylesheet" />
+    <link href="css/promises.css" rel="stylesheet" />
+    <link href="css/prettify.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="js/prettify.js"></script>
+    
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+<body class="impress-not-supported" onload="prettyPrint()">
+
+<div class="fallback-message">
+    <p>Your browser <b>doesn't support the features required</b> by impress.js, so you are presented with a simplified version of this presentation.</p>
+    <p>For the best experience please use the latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</div>
+
+<div id="impress">
+    <!--
+        
+        Look at this dickhead of a piece of JavaScript. This is the kind of ugly only a mother could love.
+
+        This is a common problem to encounter in JavaScript because everything is so god damned asynchronous.
+        
+    -->
+    <div id="intro-doom" class="step slide" data-x="-1000" data-y="-1500">
+        <h2>The Pyramid of Doom</h2>
+        <pre class="prettyprint">
+            step1(function (value1) {
+                step2(value1, function(value2) {
+                    step3(value2, function(value3) {
+                        step4(value3, function(value4) {
+                            // Do something with value4
+                        });
+                    });
+                });
+            });
+        </pre>
+    </div>
+
+    <!--
+        
+        This is a much nicer and easier to read bit of code.
+
+        It's pretty clear what is going on. Step 1, then Step 2, etc, and then eventually we're finished,
+        and if anything goes wrong we use whatever the callback being passed to "fail" is.
+
+        This is one particular implementation of a specification I'm about to describe, called Q,
+        by a dude called Kris Kowal.
+        
+    -->
+
+    <div id="intro-clarity" class="step slide" data-x="0" data-y="-1500">
+        <h2>The Tower of Clarity</h2>
+        <pre class="prettyprint">
+            step1()
+            .then(step2)
+            .then(step3)
+            .then(step4)
+            .then(function (value4) {
+                // Do something with value4
+            })
+            .fail(function (error) {
+                // Handle any error from step1 through step4
+            })
+            .done();
+        </pre>
+    </div>
+
+    <!--
+        
+        This API specification is called the Promises spec.
+
+        No, it's not new, and no, it's not exclusive to JavaScript, but it's very relevant because it's an environment
+        in which it would be super helpful to have it available.
+        
+    -->
+    <div id="title" class="step title" data-x="0" data-y="0" data-scale="4">
+        <h1>Promises</h1>
+        <span class="footnote">(in Javascript)</span>
+    </div>
+
+    <div id="history-title" class="step" data-x="920" data-y="600">
+        <h1>But first, some background...</h1>
+    </div>
+
+    <!--
+        
+        The CommonJS project aims to define a set of APIs which fill the gap left by the current JavaScript specification, which is largely created for browser-based JavaScript applications.
+        
+    -->
+    <div id="commonjs-info" class="step slide" data-x="850" data-y="3000" data-rotate="90">
+        <p><strong>CommonJS</strong> is a set of proposals for APIs to fill the gap left by the standard JavaScript API. According to its authors:</p>
+        <blockquote>...the spec does not define a standard library that is useful for building a broader range of applications [than just browser-based applications]</blockquote>
+    </div>
+        
+    <div id="commonjs-promises" class="step slide" data-x="850" data-y="4000" data-rotate="90">
+        <p>One of these API proposals is the <strong>Promises</strong> API. A promise:</p>
+        <ul>
+            <li>The eventual value returned from the single completion of an operation</li>
+            <li>One of three states: unfulfilled, fulfilled, failed</li>
+            <li>Unfulfilled ➨ Fulfilled</li>
+            <li>Unfulfilled ➨ Failed</li>
+        </ul>
+    </div>
+
+    <div id="q-title" class="step title" data-x="1450" data-y="5500" data-scale="2" data-rotate="45">
+        <h1>Q</h1>
+    </div>
+
+    <div id="q-not-1" class="step slide" data-x="1850" data-y="5000">
+        <h2>Q</h2>
+        <div style="text-align:center">
+            <p>Not this guy</p>
+            <img style="width:70%" src="http://geeksyndicate.files.wordpress.com/2012/07/b23_03608_r-2_sm.jpg" />
+        </div>
+    </div>
+    
+    <div id="q-not-2" class="step slide" data-x="2850" data-y="5000">
+        <h2>Q</h2>
+        <div style="text-align:center">
+            <p>...or this guy</p>
+            <img style="width:70%" src="http://www.metrofrance.com/_internal/gxml!0/iyadmahxkofrztg2zhhxjldqca0hjgy$b2mpe7ypwqjirie8c9b1q5eipf76inz/JOHNCLEESE.jpeg" />
+        </div>
+    </div>
+
+    <div id="q-kris" class="step slide" data-x="3850" data-y="5000">
+        <h2>Q</h2>
+        <div style="text-align:center">
+            <p>...more like this guy</p>
+            <img style="width:70%" src="http://jsconf.eu/2010/speakers/kris_kowal.jpg" />
+        </div>
+    </div>
+
+    <div id="q-kris" class="step slide" data-x="3850" data-y="5000">
+        <h2>Example #1</h2>
+        <div style="text-align:center">
+            <p>...more like this guy</p>
+            <img style="width:70%" src="http://jsconf.eu/2010/speakers/kris_kowal.jpg" />
+        </div>
+    </div>
+
+    <!--
+        
+        So to make a summary of all the possible attributes used to position presentation steps, we have:
+        
+        * `data-x`, `data-y`, `data-z` -- they define the position of **the center** of step element on
+            the canvas in pixels; their default value is 0;
+        * `data-rotate-x`, `data-rotate-y`, 'data-rotate-z`, `data-rotate` -- they define the rotation of
+            the element around given axis in degrees; their default value is 0; `data-rotate` and `data-rotate-z`
+            are exactly the same;
+        * `data-scale` -- defines the scale of step element; default value is 1
+        
+        These values are used by impress.js in CSS transformation functions, so for more information consult
+        CSS transfrom docs: https://developer.mozilla.org/en/CSS/transform
+        
+    -->
+    <div id="overview" class="step" data-x="3000" data-y="1500" data-scale="10">
+    </div>
+
+</div>
+
+<!--
+    
+    Last, but not least.
+    
+    To make all described above really work, you need to include impress.js in the page.
+    I strongly encourage to minify it first.
+    
+    In here I just include full source of the script to make it more readable.
+    
+    You also need to call a `impress().init()` function to initialize impress.js presentation.
+    And you should do it in the end of your document. Not only because it's a good practice, but also
+    because it should be done when the whole document is ready.
+    Of course you can wrap it in any kind of "DOM ready" event, but I was too lazy to do so ;)
+    
+-->
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+
+<!--
+    
+    The `impress()` function also gives you access to the API that controls the presentation.
+    
+    Just store the result of the call:
+    
+        var api = impress();
+    
+    and you will get three functions you can call:
+    
+        `api.init()` - initializes the presentation,
+        `api.next()` - moves to next step of the presentation,
+        `api.prev()` - moves to previous step of the presentation,
+        `api.goto( idx | id | element, [duration] )` - moves the presentation to the step given by its index number
+                id or the DOM element; second parameter can be used to define duration of the transition in ms,
+                but it's optional - if not provided default transition duration for the presentation will be used.
+    
+    You can also simply call `impress()` again to get the API, so `impress().next()` is also allowed.
+    Don't worry, it wont initialize the presentation again.
+    
+    For some example uses of this API check the last part of the source of impress.js where the API
+    is used in event handlers.
+    
+-->
+
+</body>
+</html>
+
+<!--
+    
+    Now you know more or less everything you need to build your first impress.js presentation, but before
+    you start...
+    
+    Oh, you've already cloned the code from GitHub?
+    
+    You have it open in text editor?
+    
+    Stop right there!
+    
+    That's not how you create awesome presentations. This is only a code. Implementation of the idea that
+    first needs to grow in your mind.
+    
+    So if you want to build great presentation take a pencil and piece of paper. And turn off the computer.
+    
+    Sketch, draw and write. Brainstorm your ideas on a paper. Try to build a mind-map of what you'd like
+    to present. It will get you closer and closer to the layout you'll build later with impress.js.
+    
+    Get back to the code only when you have your presentation ready on a paper. It doesn't make sense to do
+    it earlier, because you'll only waste your time fighting with positioning of useless points.
+    
+    If you think I'm crazy, please put your hands on a book called "Presentation Zen". It's all about 
+    creating awesome and engaging presentations.
+    
+    Think about it. 'Cause impress.js may not help you, if you have nothing interesting to say.
+    
+-->
+
+<!--
+    
+    Are you still reading this?
+    
+    For real?
+    
+    I'm impressed! Feel free to let me know that you got that far (I'm @bartaz on Twitter), 'cause I'd like
+    to congratulate you personally :)
+    
+    But you don't have to do it now. Take my advice and take some time off. Make yourself a cup of coffee, tea,
+    or anything you like to drink. And raise a glass for me ;)
+    
+    Cheers!
+    
+-->
+
