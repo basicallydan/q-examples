@@ -1,20 +1,18 @@
 <html>
 	<head>
+		<title>Q Examples: 1</title>
+		<link rel="stylesheet" href="css/examples.css" />
 	</head>
 	<body>
-		<textarea name="whatever" id="console" cols="30" rows="10"></textarea>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 		<script type="text/javascript" src="js/q.min.js"></script>
-		<script type="text/javascript">
-		console.log = function (text) {
-			$('#console').val($('#console').val() + text + '\n');
-		};
-
+		<span class="controls-prev">« previous</span><a class="controls-next" href="example-2.html">next »</a>
+<pre class="prettyprint code">
 var first = function () {
-    var d = Q.defer();
-    console.log('First one');
-    setTimeout(d.resolve, 1000);
-    return d.promise;
+	var d = Q.defer();
+	console.log('First one');
+	setTimeout(d.resolve, 1000);
+	return d.promise;
 };
 
 var second = function () {
@@ -48,6 +46,11 @@ first()
 })
 // We are not returning the promise chain, so we need to call done() to ensure unhandled errors are rethrown
 .done();
-		</script>
+</pre>
+<pre class="console"><strong>Output:</strong>
+</pre>
+		<link href="css/prettify.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/prettify.js"></script>
+		<script type="text/javascript" src="js/example-runner.js"></script>
 	</body>
 </html>

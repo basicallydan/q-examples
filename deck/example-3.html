@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<title>Q Examples: 3</title>
+		<link rel="stylesheet" href="css/examples.css" />
+	</head>
+	<body>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+		<script type="text/javascript" src="js/q.min.js"></script>
+		<a class="controls-prev" href="example-2.html">« previous</a><span class="controls-next">next »</span>
+<pre class="prettyprint code">
+var getData = function () {
+	var d = Q.defer();
+
+	$.getJSON('/hnfrontpagae',
+		function (data) {
+			d.resolve(data);
+		}
+	).error(function () {
+		d.reject(new Error('Something went wrong trying to get HN Articles'));
+	});
+
+	return d.promise;
+};
+
+var countPoints = function (data) {
+	var d = Q.defer();
+	var i = 0;
+	var numPoints = 0;
+
+	for ( ; i < data.items.length; i++) {
+		if (data.items[i].score) {
+			numPoints += +(data.items[i].score.split(' ')[0]);
+		}
+	}
+
+	d.resolve(numPoints);
+	return d.promise;
+};
+
+var outputResults = function (numberOfPoints) {
+	var d = Q.defer();
+	console.log('There are currently a total of ' + numberOfPoints + ' points on the Hacker News Frontpage');
+};
+
+getData()
+.then(countPoints)
+.then(outputResults)
+.fail(function (error) {
+	console.log('Something went wrong: ' + error.message);
+})
+.done();
+</pre>
+<pre class="console"><strong>Output:</strong>
+</pre>
+		<link href="css/prettify.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/prettify.js"></script>
+		<script type="text/javascript" src="js/example-runner.js"></script>
+	</body>
+</html>

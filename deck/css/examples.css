@@ -1,0 +1,28 @@
+.code {
+	width:50%;
+	float:left;
+	position:relative;
+}
+.console {
+	width:45%;
+	float:left;
+	margin-left:5px;
+	padding: 2px;
+	border: 1px solid #888;
+}
+.controls-go {
+	position:absolute;
+	top:2px;
+	right:2px;
+	font-weight: bold;
+}
+.controls-prev, .controls-next {
+	position:absolute;
+	top:2px;
+}
+.controls-prev {
+	left:2px;
+}
+.controls-next {
+	right:2px;
+}
