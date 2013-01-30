@@ -6,48 +6,67 @@
 	<body>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 		<script type="text/javascript" src="js/q.min.js"></script>
-		<a class="controls-prev" href="example-2.html">« previous</a><span class="controls-next">next »</span>
+		<a class="controls-prev" href="example-1.html">« previous</a><a class="controls-next" href="example-3.html">next »</a>
 <pre class="prettyprint code">
-var getData = function () {
+var oneA = function () {
+    var d = Q.defer();
+	var timeUntilResolve = Math.floor((Math.random()*2000)+1);
+    console.log('1A Starting');
+    setTimeout(function () {
+		console.log('1A Finished');
+		d.resolve('1ATime: ' + timeUntilResolve);
+    }, timeUntilResolve);
+    return d.promise;
+};
+
+var oneB = function () {
 	var d = Q.defer();
-
-	$.getJSON('/hnfrontpagae',
-		function (data) {
-			d.resolve(data);
-		}
-	).error(function () {
-		d.reject(new Error('Something went wrong trying to get HN Articles'));
-	});
-
+	var timeUntilResolve = Math.floor((Math.random()*2000)+1);
+	console.log('1B Starting');
+	setTimeout(function () {
+		console.log('1B Finished');
+		d.resolve('1BTime: ' + timeUntilResolve);
+    }, timeUntilResolve);
 	return d.promise;
 };
 
-var countPoints = function (data) {
+// This fuction throws an error which later on we show will be handled
+var two = function (oneATime, oneBTime) {
 	var d = Q.defer();
-	var i = 0;
-	var numPoints = 0;
-
-	for ( ; i < data.items.length; i++) {
-		if (data.items[i].score) {
-			numPoints += +(data.items[i].score.split(' ')[0]);
-		}
-	}
-
-	d.resolve(numPoints);
+	console.log('OneA: ' + oneATime + ', OneB: ' + oneBTime);
+	console.log('2 Starting and Finishing, so 3A and 3B should start');
+	d.resolve();
 	return d.promise;
 };
 
-var outputResults = function (numberOfPoints) {
-	var d = Q.defer();
-	console.log('There are currently a total of ' + numberOfPoints + ' points on the Hacker News Frontpage');
+var threeA = function () {
+    var d = Q.defer();
+    console.log('3A Starting');
+    setTimeout(function () {
+		console.log('3A Finished');
+		d.resolve();
+    }, Math.floor((Math.random()*2000)+1));
+    return d.promise;
 };
 
-getData()
-.then(countPoints)
-.then(outputResults)
-.fail(function (error) {
-	console.log('Something went wrong: ' + error.message);
-})
+var threeB = function () {
+    var d = Q.defer();
+    console.log('3B Starting');
+    setTimeout(function () {
+		console.log('3B Finished');
+		d.resolve();
+    }, Math.floor((Math.random()*5000)+1));
+    return d.promise;
+};
+
+var four = function () {
+	console.log('Four is now done');
+};
+
+Q.allResolved([ oneA(), oneB() ])
+.spread(two)
+.then(function () { return Q.all([ threeA(), threeB() ]); })
+.then(four)
 .done();
 </pre>
 <pre class="console"><strong>Output:</strong>
