@@ -8,9 +8,10 @@ $(document).ready(function() {
 	};
 
 	$('pre.code').each(function(i, jsElement) {
-		var js = $(jsElement).text();
-		var runJsLink = $('<a class="controls-go" href="#">Do it</a>').appendTo(jsElement);
+		$(this).bind('blur', prettyPrint);
+		var runJsLink = $('<a class="controls-go" contenteditable="false" href="#">Do it</a>').insertBefore(jsElement);
 		runJsLink.click(function () {
+			var js = $(jsElement).text();
 			eval(js);
 		});
 	});
