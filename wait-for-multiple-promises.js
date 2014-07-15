@@ -28,7 +28,7 @@ var two = function (oneATime, oneBTime) {
 	console.log('OneA: ' + oneATime + ', OneB: ' + oneBTime);
 	console.log('2 Starting and Finishing, so 3A and 3B should start');
 	d.resolve();
-	return d.promise;
+	//return d.promise;
 };
 
 var threeA = function () {
@@ -55,7 +55,7 @@ var four = function () {
 	console.log('Four is now done');
 };
 
-Q.allResolved([ oneA(), oneB() ])
+Q.all([ oneA(), oneB() ])
 .spread(two)
 .then(function () { return Q.all([ threeA(), threeB() ]); })
 .then(four)
